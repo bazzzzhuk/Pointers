@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35707.178 d17.12
+VisualStudioVersion = 17.12.35707.178
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Pointers", "Pointers\Pointers.vcxproj", "{C2766211-0EE7-48EF-B2EF-5D4ABBE3D0EE}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NransferParameters", "NransferParameters\NransferParameters.vcxproj", "{964F8BA8-64BB-45F5-A56B-0BEECE21955E}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TransferParameters", "TransferParameters\TransferParameters.vcxproj", "{60CD230B-CF47-4751-9A77-D6BB40F9C881}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,14 +23,14 @@ Global
 		{C2766211-0EE7-48EF-B2EF-5D4ABBE3D0EE}.Release|x64.Build.0 = Release|x64
 		{C2766211-0EE7-48EF-B2EF-5D4ABBE3D0EE}.Release|x86.ActiveCfg = Release|Win32
 		{C2766211-0EE7-48EF-B2EF-5D4ABBE3D0EE}.Release|x86.Build.0 = Release|Win32
-		{964F8BA8-64BB-45F5-A56B-0BEECE21955E}.Debug|x64.ActiveCfg = Debug|x64
-		{964F8BA8-64BB-45F5-A56B-0BEECE21955E}.Debug|x64.Build.0 = Debug|x64
-		{964F8BA8-64BB-45F5-A56B-0BEECE21955E}.Debug|x86.ActiveCfg = Debug|Win32
-		{964F8BA8-64BB-45F5-A56B-0BEECE21955E}.Debug|x86.Build.0 = Debug|Win32
-		{964F8BA8-64BB-45F5-A56B-0BEECE21955E}.Release|x64.ActiveCfg = Release|x64
-		{964F8BA8-64BB-45F5-A56B-0BEECE21955E}.Release|x64.Build.0 = Release|x64
-		{964F8BA8-64BB-45F5-A56B-0BEECE21955E}.Release|x86.ActiveCfg = Release|Win32
-		{964F8BA8-64BB-45F5-A56B-0BEECE21955E}.Release|x86.Build.0 = Release|Win32
+		{60CD230B-CF47-4751-9A77-D6BB40F9C881}.Debug|x64.ActiveCfg = Debug|x64
+		{60CD230B-CF47-4751-9A77-D6BB40F9C881}.Debug|x64.Build.0 = Debug|x64
+		{60CD230B-CF47-4751-9A77-D6BB40F9C881}.Debug|x86.ActiveCfg = Debug|Win32
+		{60CD230B-CF47-4751-9A77-D6BB40F9C881}.Debug|x86.Build.0 = Debug|Win32
+		{60CD230B-CF47-4751-9A77-D6BB40F9C881}.Release|x64.ActiveCfg = Release|x64
+		{60CD230B-CF47-4751-9A77-D6BB40F9C881}.Release|x64.Build.0 = Release|x64
+		{60CD230B-CF47-4751-9A77-D6BB40F9C881}.Release|x86.ActiveCfg = Release|Win32
+		{60CD230B-CF47-4751-9A77-D6BB40F9C881}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
