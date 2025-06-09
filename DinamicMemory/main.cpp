@@ -33,9 +33,11 @@ void main()
 	arr=push_front(arr, n, value);
 	Print(arr, n);
 	arr = pop_back(arr, n);
+	cout << "Pop_back" << endl;
 	Print(arr, n);
 	
 	arr = pop_front(arr, n);
+	cout << "Pop_front" << endl;
 	Print(arr, n);
 
 	//insert - добавляет значение раздвигая под него массив
@@ -93,10 +95,7 @@ int* push_back(int arr[], int& n, int value)
 int* push_front(int arr[], int& n, int value)
 {
 	int* buffer = new int[n + 1];
-	for (int i = 0; i < n; i++)
-	{
-		buffer[i+1] = arr[i];
-	}
+	for (int i = 0; i < n; i++) buffer[i+1] = arr[i];
 	delete[] arr;
 	buffer[0] = value;
 	n++;
@@ -119,17 +118,12 @@ int* pop_front(int arr[], int& n)
 int* insert(int arr[], int& n, int value, int index)
 {
 	int* buffer = new int[++n];
-	for (int i = 0; i < index; i++)
+	for (int i = 0; i < n; i++)
 	{
-		buffer[i] = arr[i];
-	}
-	buffer[index] = value;
-	for (int i = index; i < n; i++)
-	{
-		buffer[i+1] = arr[i];
+		if(i==index)buffer[index] = value;
+		i < index ? buffer[i] = arr[i] : buffer[i+1] = arr[i];
 	}
 	delete[] arr;
-	
 	return buffer;
 }
 int* replacement(int arr[], int& n, int value, int index)
@@ -140,8 +134,7 @@ int* replacement(int arr[], int& n, int value, int index)
 int* erase(int arr[], int& n, int index)
 {
 	int* buffer = new int[--n];
-	for (int i = 0; i < index; i++) buffer[i] = arr[i];
-	for (int i = index; i < n; i++) buffer[i] = arr[i+1];
+	for (int i = 0; i < n; i++) i< index ? buffer[i] = arr[i] :buffer[i] = arr[i + 1];
 	delete[] arr;
 	return buffer;
 }
