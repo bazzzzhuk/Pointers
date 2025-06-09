@@ -1,4 +1,4 @@
-#include<iostream>
+п»ї#include<iostream>
 using namespace std;
 
 void FillRand(int arr[], const int n);
@@ -18,18 +18,18 @@ void main()
 {
 	setlocale(LC_ALL, "");
 	int n;
-	cout << "Введите размер массива: "; cin >> n;
+	cout << "Р’РІРµРґРёС‚Рµ СЂР°Р·РјРµСЂ РјР°СЃСЃРёРІР°: "; cin >> n;
 	int* arr = new int[n];
 
 	FillRand(arr, n);
 	Print(arr, n);
 
 	int value;
-	cout << "Введите добавляемое значение: "; cin >> value;
+	cout << "Р’РІРµРґРёС‚Рµ РґРѕР±Р°РІР»СЏРµРјРѕРµ Р·РЅР°С‡РµРЅРёРµ: "; cin >> value;
 	arr = push_back(arr, n, value);
 	Print(arr, n);
 
-	cout << "Введите добавляемое значение: "; cin >> value;
+	cout << "Р’РІРµРґРёС‚Рµ РґРѕР±Р°РІР»СЏРµРјРѕРµ Р·РЅР°С‡РµРЅРёРµ: "; cin >> value;
 	arr=push_front(arr, n, value);
 	Print(arr, n);
 	arr = pop_back(arr, n);
@@ -40,19 +40,19 @@ void main()
 	cout << "Pop_front" << endl;
 	Print(arr, n);
 
-	//insert - добавляет значение раздвигая под него массив
+	//insert - РґРѕР±Р°РІР»СЏРµС‚ Р·РЅР°С‡РµРЅРёРµ СЂР°Р·РґРІРёРіР°СЏ РїРѕРґ РЅРµРіРѕ РјР°СЃСЃРёРІ
 	int index;
-	cout << "Введите добавляемое значение и индекс: "; cin >> value >> index;
+	cout << "Р’РІРµРґРёС‚Рµ РґРѕР±Р°РІР»СЏРµРјРѕРµ Р·РЅР°С‡РµРЅРёРµ Рё РёРЅРґРµРєСЃ: "; cin >> value >> index;
 	arr = insert(arr, n, value, index);
 	Print(arr, n);
 
-	//replacement - заменяет значение по индексу
-	cout << "Введите заменяемое значение и индекс: "; cin >> value >> index;
+	//replacement - Р·Р°РјРµРЅСЏРµС‚ Р·РЅР°С‡РµРЅРёРµ РїРѕ РёРЅРґРµРєСЃСѓ
+	cout << "Р’РІРµРґРёС‚Рµ Р·Р°РјРµРЅСЏРµРјРѕРµ Р·РЅР°С‡РµРЅРёРµ Рё РёРЅРґРµРєСЃ: "; cin >> value >> index;
 	arr = replacement(arr, n, value, index);
 	Print(arr, n);
 
-	//erase - удаляет значение/элемент массива по индексу
-	cout << "Введите индекс удаляемого элемента: "; cin >> index;
+	//erase - СѓРґР°Р»СЏРµС‚ Р·РЅР°С‡РµРЅРёРµ/СЌР»РµРјРµРЅС‚ РјР°СЃСЃРёРІР° РїРѕ РёРЅРґРµРєСЃСѓ
+	cout << "Р’РІРµРґРёС‚Рµ РёРЅРґРµРєСЃ СѓРґР°Р»СЏРµРјРѕРіРѕ СЌР»РµРјРµРЅС‚Р°: "; cin >> index;
 	arr=erase(arr, n, index);
 	Print(arr, n);
 
@@ -87,7 +87,7 @@ int* push_back(int arr[], int& n, int value)
 	}
 	delete[] arr;
 	arr = buffer;
-	buffer = nullptr;//nullptr - указатель на ноль.
+	buffer = nullptr;//nullptr - СѓРєР°Р·Р°С‚РµР»СЊ РЅР° РЅРѕР»СЊ.
 	arr[n] = value;
 	n++;
 	return arr;
