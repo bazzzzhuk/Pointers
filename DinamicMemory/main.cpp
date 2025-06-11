@@ -1,6 +1,10 @@
 ﻿#include<iostream>
 using namespace std;
 
+//Allocate()
+//Clear()
+
+
 void FillRand(int arr[], const int n, int minRand = 0, int maxRand = 100);
 void FillRand(int** arr, const int rows, const int cols, int minRand = 0, int maxRand = 100);
 void Print(int arr[], const int n);
@@ -16,8 +20,46 @@ int* replacement(int arr[], int& n, int value, int index);
 int* erase(int arr[], int& n, int index);
 
 int** push_row_back(int** arr, int& rows, const int cols);
+int** push_row_front(int** arr, int& rows, const int cols);
+int** insert_row(int** arr, int& rows, const int cols, int indx);
+int** pop_row_back(int** arr, int& rows, const int cols);
+/*
++push_row_front()
++insert_row()
+pop_row_back()
+pop_row_front()
+erase_row()*/
 
 void push_col_back(int** arr, const int rows, int& cols);
+//push_col_front()
+//insert_col()
+//pop_col_back()
+//pop_col_front()
+//erase_col()
+
+
+
+//
+//? ? ? Allocate(? ? ? );	//Выделяет память для двумерного динамического массива	
+//? ? ? Clear(? ? ? );		//Удаляет двумерный динамический массив из памяти		
+//
+
+//? ? ? push_row_front(? ? ? );//добавляет строку в начало двумерного динамического массива			
+//? ? ? insert_row(? ? ? );	//вставляет строку в двумерный динамический массив по заданному индексу	
+//
+// 
+// 
+//? ? ? pop_row_back(? ? ? );	//удаляет последнюю строку							
+//? ? ? pop_row_front(? ? ? );	//удаляет нулевую строку
+//? ? ? erase_row(? ? ? );		//удаляет строку по заданному индексу
+//
+
+//? ? ? push_col_front(? ? ? );//добавляет столбец в начало двумерного динамического массива
+//? ? ? insert_col(? ? ? );	//вставляет столбец в двумерный динамический массив по заданному индексу
+//
+//? ? ? pop_col_back(? ? ? );	//удаляет последнюю столбец
+//? ? ? pop_col_front(? ? ? );	//удаляет нулевую столбец
+//? ? ? erase_col(? ? ? );		//удаляет столбец по заданному индексу
 
 //#define DYNAMIC_MEMORY_1
 #define DYNAMIC_MEMORY_2
@@ -71,6 +113,7 @@ void main()
 #endif
 	int rows;
 	int cols;
+	int indx;
 	cout << "enter rows: "; cin >> rows;
 	cout << "enter cols: "; cin >> cols;
 
@@ -90,6 +133,17 @@ void main()
 	push_col_back(arr, rows, cols);
 	for (int i = 0; i < rows; i++)arr[i][cols - 1] = rand() % 1000;
 	Print(arr, rows, cols);
+	cout << "push_row_front: " << endl;
+	arr=push_row_front(arr, rows, cols);
+	Print(arr, rows, cols);
+	cout << "Enter insert index: "; cin >> indx;
+	arr = insert_row(arr, rows, cols, indx);
+	Print(arr, rows, cols);
+	arr=pop_row_back(arr, rows, cols);
+	cout << "pop_row_back: " << endl;
+	Print(arr, rows, cols);
+	
+
 
 	for (int i = 0; i < rows; i++)
 	{
@@ -110,6 +164,43 @@ int** push_row_back(int** arr, int& rows, const int cols)
 	rows++;
 	return buffer;
 }
+int** push_row_front(int** arr, int& rows, const int cols)
+{
+	int** buffer = new int* [rows + 1];
+	for (int i = 0; i < rows; i++)
+	{
+		buffer[i+1] = arr[i];
+	}
+	delete[] arr;
+	buffer[0] = new int[cols] {};
+	rows++;
+	return buffer;
+}
+int** insert_row(int** arr, int& rows, const int cols, int indx)
+{
+	int** buffer = new int* [rows + 1];
+	buffer[indx] = new int[cols] {};
+	for (int i = 0; i < rows; i++)i < indx ? buffer[i] = arr[i] : buffer[i + 1] = arr[i];
+	delete[] arr;
+	rows++;
+	return buffer;
+}
+int** pop_row_back(int** arr, int& rows, const int cols)
+{
+	int** buffer = new int* [rows - 1];
+	for (int i = 0; i < rows-1; i++)
+	{
+		buffer[i] = arr[i];
+	}
+	delete[] arr;
+	rows--;
+	return buffer;
+}
+
+
+
+
+
 void push_col_back(int** arr, const int rows, int& cols)
 {
 	for (int i = 0; i < rows; i++)
