@@ -1,68 +1,47 @@
 ﻿#include<iostream>
 using namespace std;
 
+//#define DYNAMIC_MEMORY_1
+#define DYNAMIC_MEMORY_2
+#define tab "\t"
+#define PROTOTYPEs
+#define REALIZATION_STD
+#define REALIZATION_DYN_MEM_1
+#define REALIZATION_ROWS
+#define REALIZATION_COLS
+
 //Allocate()
 //Clear()
-
-
+//// CREATE/DELETE 2D ///////////////////////////////////////
+#ifdef PROTOTYPEs
 void FillRand(int arr[], const int n, int minRand = 0, int maxRand = 100);
 void FillRand(int** arr, const int rows, const int cols, int minRand = 0, int maxRand = 100);
 void Print(int arr[], const int n);
 void Print(int** arr, const int rows, const int cols);
-/////////// --- DYNAMIC MEMORY 1 Lesson --- //////////////////
+/////////// --- DYNAMIC MEMORY 1 Lesson --- /////////////////
 int* push_back(int arr[], int& n, int value);
 int* push_front(int arr[], int& n, int value);
 int* pop_back(int arr[], int& n);
 int* pop_front(int arr[], int& n);
-/////////// --- DYNAMIC MEMORY 1 TASK --- /////////////////////////
+/////////// --- DYNAMIC MEMORY 1 TASK --- ///////////////////
 int* insert(int arr[], int& n, int value, int index);
 int* replacement(int arr[], int& n, int value, int index);
 int* erase(int arr[], int& n, int index);
-/////////// --- ROWS --- ////////////////////////////////////////
+/////////// --- ROWS 2D --- /////////////////////////////////
 int** push_row_back(int** arr, int& rows, const int cols);
 int** push_row_front(int** arr, int& rows, const int cols);
 int** insert_row(int** arr, int& rows, const int cols, int indx);
 int** pop_row_back(int** arr, int& rows, const int cols);
 int** pop_row_front(int** arr, int& rows, const int cols);
 int** erase_row(int** arr, int& rows, const int cols, int indx);
-//////////// --- COLS --- /////////////////////////////////
+//////////// --- COLS 2D --- ////////////////////////////////
 void push_col_back(int** arr, const int rows, int& cols);
 void push_col_front(int** arr, const int rows, int& cols);
 void insert_col(int** arr, const int rows, int& cols, int indx);
 void pop_col_back(int** arr, const int rows, int& cols);
 void pop_col_front(int** arr, const int rows, int& cols);
 void erase_col(int** arr, const int rows, int& cols, int indx);
-
-
-
-
-//
-//? ? ? Allocate(? ? ? );	//Выделяет память для двумерного динамического массива	
-//? ? ? Clear(? ? ? );		//Удаляет двумерный динамический массив из памяти		
-//
-
-//? ? ? push_row_front(? ? ? );//добавляет строку в начало двумерного динамического массива			
-//? ? ? insert_row(? ? ? );	//вставляет строку в двумерный динамический массив по заданному индексу	
-//
-// 
-// 
-//? ? ? pop_row_back(? ? ? );	//удаляет последнюю строку							
-//? ? ? pop_row_front(? ? ? );	//удаляет нулевую строку
-//? ? ? erase_row(? ? ? );		//удаляет строку по заданному индексу
-//
-
-//? ? ? push_col_front(? ? ? );//добавляет столбец в начало двумерного динамического массива
-//? ? ? insert_col(? ? ? );	//вставляет столбец в двумерный динамический массив по заданному индексу
-//
-//? ? ? pop_col_back(? ? ? );	//удаляет последнюю столбец
-//? ? ? pop_col_front(? ? ? );	//удаляет нулевую столбец
-//? ? ? erase_col(? ? ? );		//удаляет столбец по заданному индексу
-
-//#define DYNAMIC_MEMORY_1
-#define DYNAMIC_MEMORY_2
-
-#define tab "\t"
-
+#endif
 void main()
 {
 	setlocale(LC_ALL, "");
@@ -182,7 +161,7 @@ void main()
 	}
 	delete[]arr;
 }
-
+#ifdef REALIZATION_ROWS
 int** push_row_back(int** arr, int& rows, const int cols)
 {
 	int** buffer = new int* [rows + 1];
@@ -234,11 +213,8 @@ int** erase_row(int** arr, int& rows, const int cols, int indx)
 	rows--;
 	return buffer;
 }
-
-
-
-
-
+#endif
+#ifdef REALIZATION_COLS
 void push_col_back(int** arr, const int rows, int& cols)
 {
 	for (int i = 0; i < rows; i++)
@@ -305,8 +281,8 @@ void erase_col(int** arr, const int rows, int& cols, int indx)
 	}
 	cols--;
 }
-
-
+#endif
+#ifdef REALIZATION_STD
 void FillRand(int arr[], const int n, int minRand, int maxRand)
 {
 	for (int i = 0; i < n; i++)
@@ -341,7 +317,8 @@ void Print(int** arr, const int rows, const int cols)
 	}
 	cout << endl;
 }
-
+#endif
+#ifdef REALIZATION_DYN_MEM_1
 int* push_back(int arr[], int& n, int value)
 {
 	int* buffer = new int[n + 1];
@@ -399,3 +376,4 @@ int* erase(int arr[], int& n, int index)
 	delete[] arr;
 	return buffer;
 }
+#endif
