@@ -10,9 +10,10 @@ using namespace std;
 #define REALIZATION_ROWS
 #define REALIZATION_COLS
 
-//Allocate()
-//Clear()
-//// CREATE/DELETE 2D ///////////////////////////////////////
+//// CREATE/DELETE 2D /////////////////////////
+int** Allocate(const int rows, const int cols);
+void Clear(int** arr);
+///////////////////////////////////////////////
 #ifdef PROTOTYPEs
 void FillRand(int arr[], const int n, int minRand = 0, int maxRand = 100);
 void FillRand(int** arr, const int rows, const int cols, int minRand = 0, int maxRand = 100);
@@ -90,16 +91,17 @@ void main()
 	int rows;
 	int cols;
 	int indx;
+	int** arr;
 	cout << "Enter rows: "; cin >> rows;
 	cout << "Enter cols: "; cin >> cols;
 
-	int** arr = new int* [rows]; // создаем массив указателей
-	//выделяем память под строки
-	for (int i = 0; i < rows; i++)
-	{
-		arr[i] = new int[cols];
-	}
-
+	//int** arr = new int* [rows]; // создаем массив указателей
+	////выделяем память под строки
+	//for (int i = 0; i < rows; i++)
+	//{
+	//	arr[i] = new int[cols];
+	//}
+	arr = Allocate(rows, cols);
 	FillRand(arr, rows, cols);
 	Print(arr, rows, cols);
 	//// ROWS /////////////////////////
@@ -145,20 +147,36 @@ void main()
 
 	cout << "pop_col_back: " << endl;
 	pop_col_back(arr, rows, cols);
-	Print(arr, rows,cols);
+	Print(arr, rows, cols);
 
 	cout << "pop_col_front: " << endl;
 	pop_col_front(arr, rows, cols);
-	Print(arr, rows,cols);
-	
+	Print(arr, rows, cols);
+
 	cout << "enter erase_col index: " << endl; cin >> indx;
-	erase_col(arr, rows, cols,indx);
-	Print(arr, rows,cols);
-    /////////////////////////////////////
+	erase_col(arr, rows, cols, indx);
+	Print(arr, rows, cols);
+	/////////////////////////////////////
 	for (int i = 0; i < rows; i++)
 	{
 		delete[] arr[i];
 	}
+
+	Clear(arr);
+	//delete[]arr;
+}
+int** Allocate(const int rows, const int cols)
+{
+	int** arr = new int* [rows]; // создаем массив указателей
+	//выделяем память под строки
+	for (int i = 0; i < rows; i++)
+	{
+		arr[i] = new int[cols];
+	}
+	return arr;
+}
+void Clear(int** arr)
+{
 	delete[]arr;
 }
 #ifdef REALIZATION_ROWS
