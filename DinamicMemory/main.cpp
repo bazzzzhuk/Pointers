@@ -12,7 +12,7 @@ using namespace std;
 
 //// CREATE/DELETE 2D /////////////////////////
 int** Allocate(const int rows, const int cols);
-void Clear(int** arr);
+void Clear(int**& arr, const int rows,const int cols);
 ///////////////////////////////////////////////
 #ifdef PROTOTYPEs
 void FillRand(int arr[], const int n, int minRand = 0, int maxRand = 100);
@@ -91,7 +91,6 @@ void main()
 	int rows;
 	int cols;
 	int indx;
-	int** arr;
 	cout << "Enter rows: "; cin >> rows;
 	cout << "Enter cols: "; cin >> cols;
 
@@ -101,7 +100,7 @@ void main()
 	//{
 	//	arr[i] = new int[cols];
 	//}
-	arr = Allocate(rows, cols);
+	int** arr = Allocate(rows, cols);
 	FillRand(arr, rows, cols);
 	Print(arr, rows, cols);
 	//// ROWS /////////////////////////
@@ -157,13 +156,7 @@ void main()
 	erase_col(arr, rows, cols, indx);
 	Print(arr, rows, cols);
 	/////////////////////////////////////
-	for (int i = 0; i < rows; i++)
-	{
-		delete[] arr[i];
-	}
-
-	Clear(arr);
-	//delete[]arr;
+	Clear(arr,rows,cols);
 }
 int** Allocate(const int rows, const int cols)
 {
@@ -175,9 +168,14 @@ int** Allocate(const int rows, const int cols)
 	}
 	return arr;
 }
-void Clear(int** arr)
+void Clear(int**& arr,const int rows, const int cols)
 {
+	for (int i = 0; i < rows; i++)
+	{
+		delete[] arr[i];
+	}
 	delete[]arr;
+	arr = nullptr;
 }
 #ifdef REALIZATION_ROWS
 int** push_row_back(int** arr, int& rows, const int cols)
@@ -293,7 +291,7 @@ void erase_col(int** arr, const int rows, int& cols, int indx)
 	for (int i = 0; i < rows; i++)
 	{
 		int* buffer = new int[cols - 1];
-		for (int ii = 0; ii < cols - 1; ii++)i < indx ? buffer[ii] = arr[i][ii] : buffer[ii] = arr[i][ii + 1];
+		for (int ii = 0; ii < cols - 1; ii++)ii < indx ? buffer[ii] = arr[i][ii] : buffer[ii] = arr[i][ii + 1];
 		delete[] arr[i];
 		arr[i] = buffer;
 	}
