@@ -1,8 +1,8 @@
 ﻿#include<iostream>
 using namespace std;
 
-//#define DYNAMIC_MEMORY_1
-#define DYNAMIC_MEMORY_2
+#define DYNAMIC_MEMORY_1
+//#define DYNAMIC_MEMORY_2
 #define tab "\t"
 #define PROTOTYPEs
 #define REALIZATION_STD
@@ -12,36 +12,35 @@ using namespace std;
 
 //// CREATE/DELETE 2D /////////////////////////
 int** Allocate(const int rows, const int cols);
-void Clear(int**& arr, const int rows,const int cols);
+void Clear(int**& arr, const int rows, const int cols);
 ///////////////////////////////////////////////
 #ifdef PROTOTYPEs
 void FillRand(int arr[], const int n, int minRand = 0, int maxRand = 100);
 void FillRand(int** arr, const int rows, const int cols, int minRand = 0, int maxRand = 100);
-void Print(int arr[], const int n);
-void Print(int** arr, const int rows, const int cols);
+template<typename T>void Print(T arr[], const int n);
+template<typename T>void Print(T** arr, const int rows, const int cols);
 /////////// --- DYNAMIC MEMORY 1 Lesson --- /////////////////
-int* push_back(int arr[], int& n, int value);
-int* push_front(int arr[], int& n, int value);
-int* pop_back(int arr[], int& n);
-int* pop_front(int arr[], int& n);
+template<typename T>T* push_back(T arr[], int& n, T value);
+template<typename T>T* push_front(T arr[], int& n, T value);
+template<typename T>T* pop_back(T arr[], int& n);
+template<typename T>T* pop_front(T arr[], int& n);
 /////////// --- DYNAMIC MEMORY 1 TASK --- ///////////////////
-int* insert(int arr[], int& n, int value, int index);
-int* replacement(int arr[], int& n, int value, int index);
-int* erase(int arr[], int& n, int index);
+template<typename T>T* insert(T arr[], int& n, T value, T index);
+template<typename T>T* erase(T arr[], int& n, T index);
 /////////// --- ROWS 2D --- /////////////////////////////////
-int** push_row_back(int** arr, int& rows, const int cols);
-int** push_row_front(int** arr, int& rows, const int cols);
-int** insert_row(int** arr, int& rows, const int cols, int indx);
-int** pop_row_back(int** arr, int& rows, const int cols);
-int** pop_row_front(int** arr, int& rows, const int cols);
-int** erase_row(int** arr, int& rows, const int cols, int indx);
+template<typename T>T** push_row_back(T** arr, int& rows, const int cols);
+template<typename T>T** push_row_front(T** arr, int& rows, const int cols);
+template<typename T>T** insert_row(T** arr, int& rows, const int cols, const int indx);
+template<typename T>T** pop_row_back(T** arr, int& rows, const int cols);
+template<typename T>T** pop_row_front(T** arr, int& rows, const int cols);
+template<typename T>T** erase_row(T** arr, int& rows, const int cols, const int indx);
 //////////// --- COLS 2D --- ////////////////////////////////
-void push_col_back(int** arr, const int rows, int& cols);
-void push_col_front(int** arr, const int rows, int& cols);
-void insert_col(int** arr, const int rows, int& cols, int indx);
-void pop_col_back(int** arr, const int rows, int& cols);
-void pop_col_front(int** arr, const int rows, int& cols);
-void erase_col(int** arr, const int rows, int& cols, int indx);
+template<typename T>void push_col_back(T** arr, const int rows, int& cols);
+template<typename T>void push_col_front(T** arr, const int rows, int& cols);
+template<typename T>void insert_col(T** arr, const int rows, int& cols, const int indx);
+template<typename T>void pop_col_back(T** arr, const int rows, int& cols);
+template<typename T>void pop_col_front(T** arr, const int rows, int& cols);
+template<typename T>void erase_col(T** arr, const int rows, int& cols, const int indx);
 #endif
 void main()
 {
@@ -76,11 +75,6 @@ void main()
 	arr = insert(arr, n, value, index);
 	Print(arr, n);
 
-	//replacement - заменяет значение по индексу
-	cout << "Введите заменяемое значение и индекс: "; cin >> value >> index;
-	arr = replacement(arr, n, value, index);
-	Print(arr, n);
-
 	//erase - удаляет значение/элемент массива по индексу
 	cout << "Введите индекс удаляемого элемента: "; cin >> index;
 	arr = erase(arr, n, index);
@@ -88,6 +82,7 @@ void main()
 
 	delete[] arr;
 #endif
+#ifdef DYNAMIC_MEMORY_2
 	int rows;
 	int cols;
 	int indx;
@@ -156,7 +151,8 @@ void main()
 	erase_col(arr, rows, cols, indx);
 	Print(arr, rows, cols);
 	/////////////////////////////////////
-	Clear(arr,rows,cols);
+	Clear(arr, rows, cols);
+#endif
 }
 int** Allocate(const int rows, const int cols)
 {
@@ -168,7 +164,7 @@ int** Allocate(const int rows, const int cols)
 	}
 	return arr;
 }
-void Clear(int**& arr,const int rows, const int cols)
+void Clear(int**& arr, const int rows, const int cols)
 {
 	for (int i = 0; i < rows; i++)
 	{
@@ -178,52 +174,52 @@ void Clear(int**& arr,const int rows, const int cols)
 	arr = nullptr;
 }
 #ifdef REALIZATION_ROWS
-int** push_row_back(int** arr, int& rows, const int cols)
+template<typename T>T**  push_row_back(T** arr, int& rows, const int cols)
 {
-	int** buffer = new int* [rows + 1];
+	T** buffer = new T* [rows + 1];
 	for (int i = 0; i < rows; i++)buffer[i] = arr[i];
 	delete[] arr;
-	buffer[rows] = new int[cols] {};
+	buffer[rows] = new T[cols]{};
 	rows++;
 	return buffer;
 }
-int** push_row_front(int** arr, int& rows, const int cols)
+template<typename T>T** push_row_front(T** arr, int& rows, const int cols)
 {
-	int** buffer = new int* [rows + 1];
+	T** buffer = new T* [rows + 1];
 	for (int i = 0; i < rows; i++)buffer[i + 1] = arr[i];
 	delete[] arr;
-	buffer[0] = new int[cols] {};
+	buffer[0] = new T[cols] {};
 	rows++;
 	return buffer;
 }
-int** insert_row(int** arr, int& rows, const int cols, int indx)
+template<typename T>T**     insert_row(T** arr, int& rows, const int cols, const int indx)
 {
-	int** buffer = new int* [rows + 1];
-	buffer[indx] = new int[cols] {};
+	T** buffer = new T* [rows + 1];
+	buffer[indx] = new T[cols] {};
 	for (int i = 0; i < rows; i++)i < indx ? buffer[i] = arr[i] : buffer[i + 1] = arr[i];
 	delete[] arr;
 	rows++;
 	return buffer;
 }
-int** pop_row_back(int** arr, int& rows, const int cols)
+template<typename T>T**   pop_row_back(T** arr, int& rows, const int cols)
 {
-	int** buffer = new int* [rows - 1];
+	T** buffer = new T* [rows - 1];
 	for (int i = 0; i < rows - 1; i++)buffer[i] = arr[i];
 	delete[] arr;
 	rows--;
 	return buffer;
 }
-int** pop_row_front(int** arr, int& rows, const int cols)
+template<typename T>T**  pop_row_front(T** arr, int& rows, const int cols)
 {
-	int** buffer = new int* [rows - 1];
+	T** buffer = new T*[rows - 1];
 	for (int i = 0; i < rows - 1; i++) buffer[i] = arr[i + 1];
 	delete[] arr;
 	rows--;
 	return buffer;
 }
-int** erase_row(int** arr, int& rows, const int cols, int indx)
+template<typename T>T**      erase_row(T** arr, int& rows, const int cols, const int indx)
 {
-	int** buffer = new int* [rows - 1];
+	T** buffer = new T* [rows - 1];
 	for (int i = 0; i < rows - 1; i++) i < indx ? buffer[i] = arr[i] : buffer[i] = arr[i + 1];
 	delete[] arr;
 	rows--;
@@ -231,66 +227,66 @@ int** erase_row(int** arr, int& rows, const int cols, int indx)
 }
 #endif
 #ifdef REALIZATION_COLS
-void push_col_back(int** arr, const int rows, int& cols)
+template<typename T>void  push_col_back(T** arr, const int rows, int& cols)
 {
 	for (int i = 0; i < rows; i++)
 	{
-		int* buffer = new int[cols + 1] {};
+		T* buffer = new T[cols + 1] {};
 		for (int j = 0; j < cols; j++)buffer[j] = arr[i][j];
 		delete[] arr[i];
 		arr[i] = buffer;
 	}
 	cols++;
 }
-void push_col_front(int** arr, const int rows, int& cols)
+template<typename T>void push_col_front(T** arr, const int rows, int& cols)
 {
 	for (int i = 0; i < rows; i++)
 	{
-		int* buffer = new int[cols + 1] {};
+		T* buffer = new T[cols + 1] {};
 		for (int ii = 0; ii < cols; ii++)buffer[ii + 1] = arr[i][ii];
 		delete[] arr[i];
 		arr[i] = buffer;
 	}
 	cols++;
 }
-void insert_col(int** arr, const int rows, int& cols, int indx)
+template<typename T>void     insert_col(T** arr, const int rows, int& cols, const int indx)
 {
 	for (int i = 0; i < rows; i++)
 	{
-		int* buffer = new int[cols + 1] {};
+		T* buffer = new T[cols + 1] {};
 		for (int ii = 0; ii < cols; ii++)ii < indx ? buffer[ii] = arr[i][ii] : buffer[ii + 1] = arr[i][ii];
 		delete[] arr[i];
 		arr[i] = buffer;
 	}
 	cols++;
 }
-void pop_col_back(int** arr, const int rows, int& cols)
+template<typename T>void   pop_col_back(T** arr, const int rows, int& cols)
 {
 	for (int i = 0; i < rows; i++)
 	{
-		int* buffer = new int[cols - 1];
+		T* buffer = new T[cols - 1];
 		for (int ii = 0; ii < cols - 1; ii++)buffer[ii] = arr[i][ii];
 		delete[] arr[i];
 		arr[i] = buffer;
 	}
 	cols--;
 }
-void pop_col_front(int** arr, const int rows, int& cols)
+template<typename T>void  pop_col_front(T** arr, const int rows, int& cols)
 {
 	for (int i = 0; i < rows; i++)
 	{
-		int* buffer = new int[cols - 1];
+		T* buffer = new T[cols - 1];
 		for (int ii = 0; ii < cols - 1; ii++)buffer[ii] = arr[i][ii + 1];
 		delete[]arr[i];
 		arr[i] = buffer;
 	}
 	cols--;
 }
-void erase_col(int** arr, const int rows, int& cols, int indx)
+template<typename T>void      erase_col(T** arr, const int rows, int& cols, const int indx)
 {
 	for (int i = 0; i < rows; i++)
 	{
-		int* buffer = new int[cols - 1];
+		T* buffer = new T[cols - 1];
 		for (int ii = 0; ii < cols - 1; ii++)ii < indx ? buffer[ii] = arr[i][ii] : buffer[ii] = arr[i][ii + 1];
 		delete[] arr[i];
 		arr[i] = buffer;
@@ -316,14 +312,14 @@ void FillRand(int** arr, const int rows, const int cols, int minRand, int maxRan
 		}
 	}
 }
-void Print(int arr[], const int n)
+template<typename T>void Print(T arr[], const int n)
 {
 	//cout << arr << endl;
 	//cout << *arr << endl;
 	for (int i = 0; i < n; i++) cout << arr[i] << "\t";//subscript operator
 	cout << endl;
 }
-void Print(int** arr, const int rows, const int cols)
+template<typename T>void Print(T** arr, const int rows, const int cols)
 {
 
 	for (int i = 0; i < rows; i++)
@@ -335,9 +331,9 @@ void Print(int** arr, const int rows, const int cols)
 }
 #endif
 #ifdef REALIZATION_DYN_MEM_1
-int* push_back(int arr[], int& n, int value)
+template<typename T>T* push_back(T arr[], int& n, T value)
 {
-	int* buffer = new int[n + 1];
+	T* buffer = new T[n + 1];
 	for (int i = 0; i < n; i++)
 	{
 		buffer[i] = arr[i];
@@ -349,45 +345,40 @@ int* push_back(int arr[], int& n, int value)
 	n++;
 	return arr;
 }
-int* push_front(int arr[], int& n, int value)
+template<typename T>T* push_front(T arr[], int& n, T value)
 {
-	int* buffer = new int[n + 1];
+	T* buffer = new T[n + 1];
 	for (int i = 0; i < n; i++) buffer[i + 1] = arr[i];
 	delete[] arr;
 	buffer[0] = value;
 	n++;
 	return buffer;
 }
-int* pop_back(int arr[], int& n)
+template<typename T>T* pop_back(T arr[], int& n)
 {
-	int* buffer = new int[--n];
+	T* buffer = new T[--n];
 	for (int i = 0; i < n; i++) buffer[i] = arr[i];
 	delete[] arr;
 	return buffer;
 }
-int* pop_front(int arr[], int& n)
+template<typename T>T* pop_front(T arr[], int& n)
 {
-	int* buffer = new int[--n];
+	T* buffer = new T[--n];
 	for (int i = 0; i < n; i++)buffer[i] = arr[i + 1];
 	delete[]arr;
 	return buffer;
 }
-int* insert(int arr[], int& n, int value, int index)
+template<typename T>T* insert(T arr[], int& n, T value, T index)
 {
-	int* buffer = new int[++n];
+	T* buffer = new T[++n];
 	for (int i = 0; i < n; i++)i < index ? buffer[i] = arr[i] : buffer[i + 1] = arr[i];
 	buffer[index] = value;
 	delete[] arr;
 	return buffer;
 }
-int* replacement(int arr[], int& n, int value, int index)
+template<typename T>T* erase(T arr[], int& n, T index)
 {
-	arr[index] = value;
-	return arr;
-}
-int* erase(int arr[], int& n, int index)
-{
-	int* buffer = new int[--n];
+	T* buffer = new T[--n];
 	for (int i = 0; i < n; i++) i < index ? buffer[i] = arr[i] : buffer[i] = arr[i + 1];
 	delete[] arr;
 	return buffer;
