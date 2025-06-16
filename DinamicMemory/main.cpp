@@ -23,20 +23,20 @@ void FillRand(double** arr, const int rows, const int cols, int minRand = 0, int
 template<typename T>void Print(T arr[], const int n);
 template<typename T>void Print(T** arr, const int rows, const int cols);
 /////////// --- DYNAMIC MEMORY 1 Lesson --- /////////////////
-template<typename T>T*  push_back(T arr[], int& n, T value);
-template<typename T>T* push_front(T arr[], int& n, T value);
-template<typename T>T*   pop_back(T arr[], int& n);
-template<typename T>T*  pop_front(T arr[], int& n);
+template<typename T>T*        push_back(T arr[], int& n, T value);
+template<typename T>T*       push_front(T arr[], int& n, T value);
+template<typename T>T*         pop_back(T arr[], int& n);
+template<typename T>T*        pop_front(T arr[], int& n);
 /////////// --- DYNAMIC MEMORY 1 TASK --- ///////////////////
-template<typename T>T* insert(T arr[], int& n, T value, int index);
-template<typename T>T*  erase(T arr[], int& n, int index);
+template<typename T>T*           insert(T arr[], int& n, T value, int index);
+template<typename T>T*            erase(T arr[], int& n, int index);
 /////////// --- ROWS 2D --- /////////////////////////////////
-template<typename T>T**  push_row_back(T** arr, int& rows, const int cols);
-template<typename T>T** push_row_front(T** arr, int& rows, const int cols);
-template<typename T>T**     insert_row(T** arr, int& rows, const int cols, const int indx);
-template<typename T>T**   pop_row_back(T** arr, int& rows, const int cols);
-template<typename T>T**  pop_row_front(T** arr, int& rows, const int cols);
-template<typename T>T**      erase_row(T** arr, int& rows, const int cols, const int indx);
+template<typename T>T**   push_row_back(T** arr, int& rows, const int cols);
+template<typename T>T**  push_row_front(T** arr, int& rows, const int cols);
+template<typename T>T**      insert_row(T** arr, int& rows, const int cols, const int indx);
+template<typename T>T**    pop_row_back(T** arr, int& rows, const int cols);
+template<typename T>T**   pop_row_front(T** arr, int& rows, const int cols);
+template<typename T>T**       erase_row(T** arr, int& rows, const int cols, const int indx);
 //////////// --- COLS 2D --- ////////////////////////////////
 template<typename T>void  push_col_back(T** arr, const int rows, int& cols);
 template<typename T>void push_col_front(T** arr, const int rows, int& cols);
@@ -363,7 +363,7 @@ template<typename T>void Print(T** arr, const int rows, const int cols)
 }
 #endif
 #ifdef REALIZATION_DYN_MEM_1
-template<typename T>T* push_back(T arr[], int& n, T value)
+template<typename T>T*  push_back(T arr[], int& n, T value)
 {
 	T* buffer = new T[n + 1];
 	for (int i = 0; i < n; i++)
@@ -386,21 +386,21 @@ template<typename T>T* push_front(T arr[], int& n, T value)
 	n++;
 	return buffer;
 }
-template<typename T>T* pop_back(T arr[], int& n)
+template<typename T>T*   pop_back(T arr[], int& n)
 {
 	T* buffer = new T[--n];
 	for (int i = 0; i < n; i++) buffer[i] = arr[i];
 	delete[] arr;
 	return buffer;
 }
-template<typename T>T* pop_front(T arr[], int& n)
+template<typename T>T*  pop_front(T arr[], int& n)
 {
 	T* buffer = new T[--n];
 	for (int i = 0; i < n; i++)buffer[i] = arr[i + 1];
 	delete[]arr;
 	return buffer;
 }
-template<typename T>T* insert(T arr[], int& n, T value, int index)
+template<typename T>T*     insert(T arr[], int& n, T value, int index)
 {
 	T* buffer = new T[++n];
 	for (int i = 0; i < n; i++)i < index ? buffer[i] = arr[i] : buffer[i + 1] = arr[i];
@@ -408,7 +408,7 @@ template<typename T>T* insert(T arr[], int& n, T value, int index)
 	delete[] arr;
 	return buffer;
 }
-template<typename T>T* erase(T arr[], int& n, int index)
+template<typename T>T*      erase(T arr[], int& n, int index)
 {
 	T* buffer = new T[--n];
 	for (int i = 0; i < n; i++) i < index ? buffer[i] = arr[i] : buffer[i] = arr[i + 1];
